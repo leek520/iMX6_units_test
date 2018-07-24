@@ -33,6 +33,11 @@ static void adc_test()
 
 
 }
+static void ethernet_test()
+{
+
+
+}
 int main(int argc, char *argv[])
 {
     int i;
