@@ -6,10 +6,33 @@ extern int gpio_set_direction(unsigned int gpio, unsigned int out_flag);
 extern int gpio_set_value(unsigned int gpio, unsigned int value);
 extern int gpio_get_value(unsigned int gpio);
 
+
+void split(char str[], const char delims[], int *out, int *len)
+{
+    char *result = NULL;
+    int cnt = 0;
+    result = strtok( str, delims );
+    while( result != NULL ) {
+        //printf("%s\n",result);
+        *(out++) = atoi(result);
+        result = strtok( NULL, delims );
+        cnt++;
+    }
+    *len = cnt;
+}
+
 static void gpio_test()
 {
     //获取用户输入，如果为ESC，则退出该函数
-    while(1) {
+    char str[20];
+    int para[20];
+    int len;
+    /*1.*/
+    gets(str);
+    /*2.*/
+    split(str, " ", para, &len);
+    while (1) // Danger！
+    {
         int led = IMX_GPIO_NR(1,25);
         gpio_export(led);
         gpio_set_direction(led, 1);
@@ -53,7 +76,7 @@ struct {
     char *tip;
 }CmdTip[] = {
                 { Temp_function, "Please input 1-11 to select test" } ,
-                { gpio_test, "Please input 1-11 to select test" } ,
+                { gpio_test, "GPIO test" } ,
                 { 0, 0}
             };
 
@@ -62,10 +85,10 @@ struct {
 * @author:leek
 * @date 2018/07/24
 *******************************************************************************/
-int Main(void)
+int main(void)
 {
     int i, idx;
-
+    char str[20];
     printf("<***************************************>\n");
     printf("               iMX6 Test Program\n");
     printf("<***************************************>\n");
@@ -77,7 +100,8 @@ int Main(void)
         for(i=0; CmdTip[i].fun!=0; i++)
             printf("%d : %s\n", i, CmdTip[i].tip);
 
-        scanf("%s", idx) ;
+        gets(str);
+        idx = atoi(str);
         if(idx<i)
         {
             (*CmdTip[idx].fun)();
