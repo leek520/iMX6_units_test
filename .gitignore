@@ -1,0 +1,4 @@
+#dir
+/out-arm/
+/out-x86/
+*.pro.user
