@@ -1,4 +1,4 @@
 #dir
-/out-arm/
-/out-x86/
+/output-arm/
+/output-x86/
 *.pro.user
