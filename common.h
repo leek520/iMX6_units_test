@@ -13,6 +13,9 @@
 #include <sys/types.h>
 
 
+#include <signal.h>
+#include<sys/epoll.h>
+
 #include <pthread.h>
 #define IMX_GPIO_NR(bank, nr)        (((bank) - 1) * 32 + (nr))
 

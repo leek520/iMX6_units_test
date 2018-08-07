@@ -20,4 +20,5 @@ int can_receive(int socket_fd, char *rev_buf, int *len);
 int set_filter(int socket_fd, int can_id, int frame_type);
 void create_can0_task();
 void create_can1_task();
+
 #endif // CAN_H

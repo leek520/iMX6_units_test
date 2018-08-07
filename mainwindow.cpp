@@ -185,7 +185,7 @@ MainWindow::MainWindow(QWidget *parent)
     gbox_cp->addWidget(m_cpBtn);
 
     gpio_export(LED);
-    gpio_set_direction(LED, 1);
+    gpio_set_direction(LED, IN);
 
     onTimeout();
 }

@@ -115,11 +115,11 @@ int can_receive(int socket_fd, char *rev_buf, int *len)
     struct can_frame frame;
     memset(frame.data, 0, CAN_MAX_DLEN);
     /*将读文件描述符加入描述符集合*/
-    FD_ZERO(&rfds);
+    FD_ZERO(&rfds);     //清除文件描述符集合
     FD_SET(s,&rfds);
 
     /*设置超时为1s*/
-    time.tv_sec = 0;
+    time.tv_sec = 5;
     time.tv_usec = 0;
 
     /*实现多路IO*/
@@ -342,4 +342,5 @@ void create_can1_task()
 
     pthread_create(&pid1, &attr, can1_Rx_task, NULL);
 
+    pthread_attr_destroy(&attr);
 }
